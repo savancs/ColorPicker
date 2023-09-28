@@ -26,6 +26,8 @@ public class ColorPickFragment extends Fragment {
         @Override
         public void onClick(View v) {
             int buttonIndex = grid.indexOfChild(v);
+            Toast.makeText(getActivity(), colors[buttonIndex], Toast.LENGTH_LONG).show();
+            //context.OnMessageSend
 
         }
     };
@@ -49,22 +51,28 @@ public class ColorPickFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // get the resources String Array bellow
         colors = null;
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment here
-
+        View var = inflater.inflate(R.layout.fragment_color_pick, container, false);
+        grid = var.findViewById(R.id.lightGrid);
 
         // set the color of each button here
+        colors = getResources().getStringArray(R.array.colors_array);
+
 
         // bind the listener to each button
+
 
         for(int i =0; i < grid.getChildCount(); i++){
             Button currentButton = (Button) grid.getChildAt(i);
             currentButton.setOnClickListener(buttonListener);
+            currentButton.setBackgroundColor(Color.parseColor(colors[i]));
         }
-        return null;
+        return var;
     }
 }
